@@ -2,31 +2,29 @@ package com.lyncalor.calyra.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        properties = {
-                "telegram.enabled=false",
-                "notion.enabled=false",
-                "llm.enabled=false",
-                "working-memory.enabled=false",
-                "qdrant.enabled=false"
-        })
+@WebMvcTest(HealthController.class)
 class HealthControllerTest {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    private MockMvc mockMvc;
 
     @Test
-    void healthReturnsOk() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/health", String.class);
+    void healthReturnsOk() throws Exception {
+        String responseBody = mockMvc.perform(get("/health"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("ok"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo("ok");
+        assertThat(responseBody).isEqualTo("ok");
     }
 }
