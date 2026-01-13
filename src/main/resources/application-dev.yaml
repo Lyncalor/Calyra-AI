@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${JDBC_URL:jdbc:h2:mem:calyra;DB_CLOSE_DELAY=-1;MODE=PostgreSQL}
+    driver-class-name: ${JDBC_DRIVER:org.h2.Driver}
+    username: ${JDBC_USERNAME:sa}
+    password: ${JDBC_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+  flyway:
+    enabled: true
+    clean-disabled: false

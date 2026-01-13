@@ -1,0 +1,98 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%thread] %logger{36} - %msg%n"
+
+spring:
+  profiles:
+    default: dev
+  jpa:
+    open-in-view: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+  endpoint:
+    health:
+      show-details: "never"
+  health:
+    probes:
+      enabled: true
+
+app:
+  timezone: ${APP_TIMEZONE:Europe/Berlin}
+
+telegram:
+  enabled: ${TELEGRAM_ENABLED:true}
+  bot-token: ${TELEGRAM_BOT_TOKEN:}
+  bot-username: ${TELEGRAM_BOT_USERNAME:}
+  polling-allowed-updates: ${TELEGRAM_POLLING_ALLOWED_UPDATES:}
+
+notion:
+  enabled: ${NOTION_ENABLED:true}
+  token: ${NOTION_TOKEN:}
+  database-id: ${NOTION_DATABASE_ID:}
+  notion-version: ${NOTION_VERSION:2022-06-28}
+  api-base-url: ${NOTION_API_BASE_URL:https://api.notion.com}
+  property-name-title: ${NOTION_PROPERTY_NAME_TITLE:Name}
+  property-name-source: ${NOTION_PROPERTY_NAME_SOURCE:Source}
+  property-name-raw: ${NOTION_PROPERTY_NAME_RAW:Raw}
+  property-name-start: ${NOTION_PROPERTY_NAME_START:Start}
+  property-name-end: ${NOTION_PROPERTY_NAME_END:End}
+  property-name-type: ${NOTION_PROPERTY_NAME_TYPE:Type}
+  property-name-location: ${NOTION_PROPERTY_NAME_LOCATION:Location}
+  property-name-reminder: ${NOTION_PROPERTY_NAME_REMINDER:Reminder}
+  property-type-source: ${NOTION_PROPERTY_TYPE_SOURCE:SELECT}
+
+llm:
+  enabled: ${LLM_ENABLED:true}
+  api-base-url: ${LLM_API_BASE_URL:https://api.openai.com}
+  model: ${LLM_MODEL:gpt-4o-mini}
+  api-key: ${OPENAI_API_KEY:}
+  connect-timeout: ${LLM_CONNECT_TIMEOUT:5s}
+  read-timeout: ${LLM_READ_TIMEOUT:20s}
+
+working-memory:
+  enabled: ${WORKING_MEMORY_ENABLED:true}
+  ttl-minutes: ${WORKING_MEMORY_TTL_MINUTES:30}
+  max-pending-per-chat: ${WORKING_MEMORY_MAX_PER_CHAT:1}
+
+qdrant:
+  enabled: ${QDRANT_ENABLED:true}
+  base-url: ${QDRANT_URL:http://localhost:6333}
+  collection-name: ${QDRANT_COLLECTION:calyra_memory}
+  vector-size: ${QDRANT_VECTOR_SIZE:1536}
+  distance: ${QDRANT_DISTANCE:Cosine}
+  connect-timeout: ${QDRANT_CONNECT_TIMEOUT:5s}
+  read-timeout: ${QDRANT_READ_TIMEOUT:10s}
+
+embedding:
+  provider: ${EMBEDDING_PROVIDER:fake}
+  model: ${EMBEDDING_MODEL:text-embedding-3-small}
+
+retrieval:
+  min-score: ${RETRIEVAL_MIN_SCORE:0.35}
+  min-margin: ${RETRIEVAL_MIN_MARGIN:0.05}
+  default-lookback-days: ${RETRIEVAL_LOOKBACK_DAYS:180}
+  max-candidates: ${RETRIEVAL_MAX_CANDIDATES:5}
+  selection-ttl-minutes: ${RETRIEVAL_SELECTION_TTL_MINUTES:30}
+
+suggestion:
+  enabled: ${SUGGESTION_ENABLED:true}
+  min-confidence-auto-apply: ${SUGGESTION_MIN_CONFIDENCE_AUTO:0.85}
+  min-confidence-suggest: ${SUGGESTION_MIN_CONFIDENCE_SUGGEST:0.55}
+  max-candidates-for-stats: ${SUGGESTION_MAX_CANDIDATES:10}
+  lookback-days: ${SUGGESTION_LOOKBACK_DAYS:180}
+  confirmation-required: ${SUGGESTION_CONFIRMATION_REQUIRED:true}
+
+preference-learning:
+  enabled: ${PREFERENCE_LEARNING_ENABLED:false}
+  min-samples: ${PREFERENCE_LEARNING_MIN_SAMPLES:3}
+  lookback-days: ${PREFERENCE_LEARNING_LOOKBACK_DAYS:180}
+  update-strategy: ${PREFERENCE_LEARNING_UPDATE_STRATEGY:MEDIAN}

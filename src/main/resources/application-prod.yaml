@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${JDBC_URL:jdbc:postgresql://postgres:5432/calyra}
+    driver-class-name: ${JDBC_DRIVER:org.postgresql.Driver}
+    username: ${JDBC_USERNAME:calyra}
+    password: ${JDBC_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    clean-disabled: true
