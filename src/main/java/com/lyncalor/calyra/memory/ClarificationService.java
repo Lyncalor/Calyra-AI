@@ -35,8 +35,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@ConditionalOnProperty(prefix = "working-memory", name = "enabled", havingValue = "true", matchIfMissing = true)
-@ConditionalOnProperty(prefix = "llm", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = {"working-memory.enabled", "llm.enabled"}, havingValue = "true", matchIfMissing = true)
 public class ClarificationService {
 
     private static final Logger log = LoggerFactory.getLogger(ClarificationService.class);

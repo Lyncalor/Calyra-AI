@@ -13,7 +13,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "event_stat", indexes = {
         @Index(name = "idx_event_stat_chat_id", columnList = "chat_id"),
-        @Index(name = "idx_event_stat_chat_type", columnList = "chat_id,type")
+        @Index(name = "idx_event_stat_chat_type", columnList = "chat_id,event_type")
 })
 public class EventStat {
 
@@ -24,7 +24,7 @@ public class EventStat {
     @Column(name = "chat_id", nullable = false)
     private long chatId;
 
-    @Column(name = "type")
+    @Column(name = "event_type")
     private String type;
 
     @Column(name = "duration_minutes")

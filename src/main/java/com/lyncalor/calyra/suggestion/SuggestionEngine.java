@@ -21,8 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-@ConditionalOnProperty(prefix = "suggestion", name = "enabled", havingValue = "true", matchIfMissing = true)
-@ConditionalOnProperty(prefix = "qdrant", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = {"suggestion.enabled", "qdrant.enabled"}, havingValue = "true", matchIfMissing = true)
 public class SuggestionEngine {
 
     private final VectorMemoryStore vectorMemoryStore;

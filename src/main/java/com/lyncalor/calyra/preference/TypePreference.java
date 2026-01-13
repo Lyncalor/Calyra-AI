@@ -14,7 +14,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "type_preference",
         indexes = @Index(name = "idx_type_pref_chat_id", columnList = "chat_id"),
-        uniqueConstraints = @UniqueConstraint(name = "uk_type_pref_chat_type", columnNames = {"chat_id", "type"}))
+        uniqueConstraints = @UniqueConstraint(name = "uk_type_pref_chat_type", columnNames = {"chat_id", "event_type"}))
 public class TypePreference {
 
     @Id
@@ -24,7 +24,7 @@ public class TypePreference {
     @Column(name = "chat_id", nullable = false)
     private long chatId;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "event_type", nullable = false)
     private String type;
 
     @Column(name = "typical_duration_minutes")
